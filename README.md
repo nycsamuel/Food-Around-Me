@@ -20,7 +20,8 @@ Your app must:
 * **Utilize a database** to interact with your stored data
 * **Save external API data** to your database and display it on a separate view
 * **Include wireframes** that you designed during the planning process
-* Have **semantically clean HTML and CSS**
+* Adhere to the **AirBnB style guide** for writing your JavaScript
+* Adhere to the **Google style guide** for writing your HTML/CSS
 * **Be deployed online** and accessible to the public
 
 ---
