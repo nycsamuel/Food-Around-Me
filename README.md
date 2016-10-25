@@ -17,7 +17,8 @@ Your app must:
 * **Have at _least_ 2 models** (more if they make sense) – one representing someone using your application, and one that represents the main functional idea for your app
 * **Have GET, POST, PUT, and DELETE** functionality for at least one of your models
 * **Access data from at least ONE external API** with a form
-* **Utilize a database** to interact with your stored data and save API data
+* **Utilize a database** to interact with your stored data
+* **Save external API data** to your database and display it on a separate view
 * **Include wireframes** that you designed during the planning process
 * Have **semantically clean HTML and CSS**
 * **Be deployed online** and accessible to the public
