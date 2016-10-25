@@ -14,9 +14,10 @@ This second project is your first foray into **building a full-stack application
 
 Your app must:
 
+* **Adheres to MVC structure** Models, Views, Controllers (routers) are appropriately organized by function
 * **Have at _least_ 2 models** (more if they make sense) – one representing someone using your application, and one that represents the main functional idea for your app
 * **Have GET, POST, PUT, and DELETE** functionality for at least one of your models
-* **Access data from at least ONE external API** with a form
+* **Access data from at least ONE external API**
 * **Utilize a database** to interact with your stored data
 * **Save external API data** to your database and display it on a separate view
 * **Include wireframes** that you designed during the planning process
