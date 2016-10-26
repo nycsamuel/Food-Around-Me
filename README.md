@@ -14,7 +14,7 @@ This second project is your first foray into **building a full-stack application
 
 Your app must:
 
-* **Use AJAX** to perform some major functionality of your app
+* **Use Node Fetch** to perform some major functionality of your app
 * **Adheres to MVC structure** Models, Views, Controllers (routers) are appropriately organized by function
 * **Have at _least_ 2 models** (more if they make sense) – one representing someone using your application, and one that represents the main functional idea for your app
 * **Have GET, POST, PUT, and DELETE** functionality for at least one of your models
