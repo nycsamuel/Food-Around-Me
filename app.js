@@ -1,5 +1,4 @@
 /* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
-/* eslint key-spacing: ["error", { align: "value" }] */
 /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
 const express = require('express');
