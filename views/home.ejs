@@ -7,16 +7,20 @@
   <title>Home</title>
 </head>
 <body>
-  <form action="/search" method="GET">
+  <form action="/search" method="POST">
     <input type="text" name="term" placeholder="What are you in a mood for?">
     <input type="submit" value="Search">
   </form>
 
   <% results.forEach(result => { %>
-    <h1><%= result.name %></h1>
-    <p>Rating: <%= result.rating %></p>
-    <p>Reviews: <%= result.review_count %></p>
-    <p>Phone: <%= result.phone %></p>
+    <div class="business">
+      <h1><%= result.name %></h1>
+      <img src="<%= result.image_url %>" alt="">
+      <p><%= result.location.cross_streets %></p>
+      <p>Rating: <%= result.rating %></p>
+      <p>Reviews: <%= result.review_count %></p>
+      <p>Phone: <%= result.phone %></p>
+    </div>
     <% }) %>
 
 </body>

@@ -1,9 +1,9 @@
-const requestPromise    = require('request-promise');
 const oauthSignature    = require('oauth-signature');
 const request           = require('request');
 const qs                = require('querystring');
 const n                 = require('nonce')();
 const _                 = require('lodash');
+const fetch             = require('node-fetch');
 const URL               = 'https://api.yelp.com/v2/search';
 
 /**
@@ -19,6 +19,7 @@ function search(req, res, next) {
 
   const reqParams = {
     location                : 'New+York',
+    limit                   : 5,
 
     oauth_consumer_key      : process.env.CONSUMER_KEY,
     oauth_token             : process.env.TOKEN,
@@ -44,25 +45,38 @@ function search(req, res, next) {
   );
 
   params.oauth_signature = signature; // add to params for api call
-  console.log('params *****', params);
+  // console.log('params *****', params);
 
   const paramsURL = qs.stringify(params);
 
   const API_URL = `${URL}?${paramsURL}`;
 
-  requestPromise(API_URL, (error, response, body) => {
+  /*
+  request(API_URL, (error, response, body) => {
     // console.log('error ***', error);
     // console.log('response ***', response);
     // console.log('body *********************', body);
 
     if (error) return next(error);
 
-    // convert body => JSON => JavasSript Object
+    // convert body => JSON
     const reqBody = body.toString();
 
     res.results = JSON.parse(reqBody);
     return next();
   });
+  */
+
+  fetch(API_URL)
+    .then(urlResult => urlResult.json())
+    .then(jsonResult => {
+      res.results = jsonResult;
+      next();
+    })
+    .catch(err => {
+      res.err = err;
+      next();
+    });
 }
 
 
