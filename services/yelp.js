@@ -24,6 +24,7 @@ function search(req, res, next) {
   const reqParams = {
     location                : 'New+York',
     limit                   : 5,
+    // ll                      : '40.7398476,-73.99020680000001',
 
     oauth_consumer_key      : process.env.CONSUMER_KEY,
     oauth_token             : process.env.TOKEN,
