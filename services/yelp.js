@@ -15,7 +15,10 @@ const URL               = 'https://api.yelp.com/v2/search';
 */
 function search(req, res, next) {
   // values from form post method
-  const userQuery = req.body.search;
+  const userQuery = {
+    term: req.body.term,
+  };
+  console.log(userQuery);
 
   const reqParams = {
     location                : 'New+York',
