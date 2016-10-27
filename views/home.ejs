@@ -11,5 +11,13 @@
     <input type="text" name="term" placeholder="What are you in a mood for?">
     <input type="submit" value="Search">
   </form>
+
+  <% results.forEach(result => { %>
+    <h1><%= result.name %></h1>
+    <p>Rating: <%= result.rating %></p>
+    <p>Reviews: <%= result.review_count %></p>
+    <p>Phone: <%= result.phone %></p>
+    <% }) %>
+
 </body>
 </html>

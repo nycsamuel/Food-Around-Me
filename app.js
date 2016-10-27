@@ -1,5 +1,6 @@
 /* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
 /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+require('dotenv').config();
 
 const express = require('express');
 const logger = require('morgan');
