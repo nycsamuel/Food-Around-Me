@@ -8,7 +8,7 @@ const path               = require('path');
 const methodOverride     = require('method-override');
 const bodyParser         = require('body-parser');
 
-const homeRoute          = require('./controllers/home');
+const homeRoute          = require('./controllers/index');
 const searchRoute        = require('./controllers/search');
 
 const app                = express();
@@ -16,7 +16,7 @@ const PORT               = process.argv[2] || process.env.PORT || 3000;
 
 app.use(logger('dev'));
 
-app.set(express.static(path.join(__dirname, 'public')));
+app.set(express.static(path.join(__dirname, './public')));
 // app.set(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', 'views');

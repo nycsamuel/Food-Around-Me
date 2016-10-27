@@ -3,7 +3,7 @@ const yelp    = require('../services/yelp');
 
 
 router.post('/', yelp.search, (req, res) => {
-  res.render('home', {
+  res.render('index', {
     results:   res.results.businesses || [],
   });
 });

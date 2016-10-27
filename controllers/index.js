@@ -2,7 +2,7 @@ const router  = require('express').Router();
 
 router.get('/', (req, res) => {
   // console.log(res.results.businesses);
-  res.render('home', {
+  res.render('index', {
     results:   res.results || [],
   });
 });

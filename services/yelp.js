@@ -1,10 +1,10 @@
 const oauthSignature    = require('oauth-signature');
-const request           = require('request');
 const qs                = require('querystring');
 const n                 = require('nonce')();
 const _                 = require('lodash');
 const fetch             = require('node-fetch');
 const URL               = 'https://api.yelp.com/v2/search';
+// const request           = require('request');
 
 /**
   * This is from
@@ -47,28 +47,15 @@ function search(req, res, next) {
     { encodeSignature: false }
   );
 
-  params.oauth_signature = signature; // add to params for api call
+  // add to params for api call
+  params.oauth_signature = signature;
   // console.log('params *****', params);
 
+  // stringify an object into a query string, sorting the keys
+  // i.e., turn objects into strings to be used as query strings
   const paramsURL = qs.stringify(params);
 
   const API_URL = `${URL}?${paramsURL}`;
-
-  /*
-  request(API_URL, (error, response, body) => {
-    // console.log('error ***', error);
-    // console.log('response ***', response);
-    // console.log('body *********************', body);
-
-    if (error) return next(error);
-
-    // convert body => JSON
-    const reqBody = body.toString();
-
-    res.results = JSON.parse(reqBody);
-    return next();
-  });
-  */
 
   fetch(API_URL)
     .then(urlResult => urlResult.json())
