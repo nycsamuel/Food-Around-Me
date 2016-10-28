@@ -11,7 +11,7 @@ const speech  = require('../services/speech');
 // });
 
 router.get('/', speech.sendSpeech, (req, res) => {
-  console.log(res.token);
+  // console.log(res.txt);
   res.render('index', {
     text: res.speechResult,
   });
