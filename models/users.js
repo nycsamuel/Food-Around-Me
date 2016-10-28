@@ -42,7 +42,7 @@ function deleteFav(req, res, next) {
   MongoClient.connect(dbConnection, (err, db) => {
     if (err) return next(err);
 
-    db.connect('favorites')
+    db.collection('favorites')
       .findAndRemove({ _id: ObjectID(req.params.id) }, (removeErr, doc) => {
         if(removeErr) return next(removeErr);
 

@@ -34,6 +34,9 @@
     <% fav.forEach(result => { %>
       <h3><%= result.name %></h3>
       <img src="<%= result.img %>" alt="">
+      <form action="/favorites/<%= result._id %>?_method=DELETE" method="POST">
+        <input type="submit" name="name" value="Remove">
+      </form>
     <% }) %>
   </div>
 
