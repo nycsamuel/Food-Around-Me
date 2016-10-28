@@ -11,7 +11,7 @@ function getFav(req, res, next) {
         if (arrayError) return next(arrayError);
 
         res.fav = data;
-        console.log('res.fav *** ', res.fav);
+        // console.log('res.fav *** ', res.fav);
         db.close();
         return next();
       });
@@ -22,6 +22,13 @@ function getFav(req, res, next) {
 }
 
 function saveFav(req, res, next) {
+  const insertObj = {};
+  for (let key in req.body) {
+    insertObj[key] = req.body[key];
+  }
+  insertObj.favorite.userId = req.session.userId;
+
+
   MongoClient.connect(dbConnection, (err, db) => {
     if (err) return next(err);
 

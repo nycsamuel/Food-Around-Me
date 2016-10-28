@@ -68,7 +68,7 @@ function search(req, res, next) {
     })
     .catch(err => {
       res.err = err;
-      next();
+      next(err);
     });
 }
 
