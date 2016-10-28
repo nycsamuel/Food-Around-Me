@@ -3,7 +3,7 @@ const users   = require('../models/users');
 
 router.get('/', (req, res) => {
   // console.log(res.results.businesses);
-  res.render('index', {
+  res.render('yelp/index', {
     results:   res.results || [],
     fav: res.fav || [],
   });

@@ -3,7 +3,7 @@ const router  = require('express').Router();
 const users   = require('../models/users');
 
 router.get('/', users.getFav, (req, res) => {
-  res.render('index', {
+  res.render('yelp/index', {
     results: res.results || [],
     fav: res.fav || [],
   });

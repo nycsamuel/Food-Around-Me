@@ -10,7 +10,7 @@ const yelp    = require('../services/yelp');
 // });
 
 router.post('/', yelp.search, (req, res) => {
-  res.render('index', {
+  res.render('yelp/index', {
     results:   res.results.businesses || [],
     fav: res.fav || [],
   });
