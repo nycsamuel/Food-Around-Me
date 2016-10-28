@@ -11,13 +11,12 @@ function getFav(req, res, next) {
         if (arrayError) return next(arrayError);
 
         res.fav = data;
-        console.log('fav in users res.fav *** ', res.fav);
-        // console.log('fav in users data *** ', data);
+        console.log('res.fav *** ', res.fav);
         db.close();
         return next();
       });
 
-    return next();
+    return false;
   });
   return false;
 }

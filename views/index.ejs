@@ -24,6 +24,7 @@
         <p>Phone: <%= result.phone %></p>
         <form action="/favorites" method="POST">
           <input type="hidden" name="favorite[name]" value="<%= result.name %>">
+          <input type="hidden" name="favorite[img]" value="<%= result.image_url %>">
           <input type="submit" name="name", value="Save">
         </form>
       </div>
@@ -32,6 +33,7 @@
   <div class="fav">
     <% fav.forEach(result => { %>
       <h3><%= result.name %></h3>
+      <img src="<%= result.img %>" alt="">
     <% }) %>
   </div>
 

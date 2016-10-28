@@ -9,10 +9,10 @@ const users   = require('../models/users');
 // });
 
 router.get('/', users.getFav, (req, res) => {
-  // console.log('fav in index ***', res.fav);
+  console.log('res.fav ***', res.fav);
   res.render('index', {
-    fav: res.fav || [],
     results: res.results || [],
+    fav: res.fav || [],
   });
 });
 
