@@ -1,7 +1,10 @@
 /* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
 /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-require('dotenv').config();
 
+/* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
+const dotEnv             = require('dotenv').config({silent: true});
+const session            = require('express-session');
+const cookieParser       = require('cookie-parser');
 const express            = require('express');
 const logger             = require('morgan');
 const path               = require('path');
@@ -15,14 +18,28 @@ const favRoute           = require('./controllers/fav');
 const app                = express();
 const PORT               = process.argv[2] || process.env.PORT || 3000;
 
-app.use(logger('dev'));
+const SECRET             = 'tacos3000';
 
-app.set(express.static(path.join(__dirname, './public')));
-// app.set(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+app.use(logger('dev')); // log requests to console
+
+// Set static file root folder
+app.use(express.static(path.join(__dirname, 'public')));
+// app.set(express.static('public'));
+
+// parse applicatin/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+// parse application/json
+app.use(bodyParser.json());
 app.use(methodOverride('_method'));
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: SECRET,
+}));
+// This is how we read the cookies sent over from the browser
+app.use(cookieParser());
 
 app.use('/', homeRoute);
 app.use('/search', searchRoute);
