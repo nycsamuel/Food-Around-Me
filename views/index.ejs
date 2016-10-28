@@ -13,16 +13,27 @@
     <input type="submit" value="Search">
   </form>
 
-  <% results.forEach(result => { %>
-    <div class="business">
+  <div class="search-results">
+    <% results.forEach(result => { %>
+      <div class="business">
+        <h3><%= result.name %></h3>
+        <img src="<%= result.image_url %>" alt="">
+        <p>Address: <%= result.location.cross_streets %></p>
+        <p>Rating: <%= result.rating %></p>
+        <p>Reviews: <%= result.review_count %></p>
+        <p>Phone: <%= result.phone %></p>
+        <form action="/favorites" method="POST">
+          <input type="hidden" name="favorite[name]" value="<%= result.name %>">
+          <input type="submit" name="name", value="Save">
+        </form>
+      </div>
+      <% }) %>
+  </div>
+  <div class="fav">
+    <% fav.forEach(result => { %>
       <h3><%= result.name %></h3>
-      <img src="<%= result.image_url %>" alt="">
-      <p>Address: <%= result.location.cross_streets %></p>
-      <p>Rating: <%= result.rating %></p>
-      <p>Reviews: <%= result.review_count %></p>
-      <p>Phone: <%= result.phone %></p>
-    </div>
     <% }) %>
+  </div>
 
 </body>
 </html>

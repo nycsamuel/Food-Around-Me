@@ -19,7 +19,7 @@ function search(req, res, next) {
     term                    : req.body.term,
     location                : req.body.location,
   };
-  console.log(userQuery);
+  console.log('userQuery *** ', userQuery);
 
   const reqParams = {
     location                : 'New+York',
@@ -56,6 +56,7 @@ function search(req, res, next) {
   // stringify an object into a query string, sorting the keys
   // i.e., turn objects into strings to be used as query strings
   const paramsURL = qs.stringify(params);
+  console.log('paramsURL *** ', paramsURL);
 
   const API_URL = `${URL}?${paramsURL}`;
 

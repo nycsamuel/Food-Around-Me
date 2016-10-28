@@ -10,7 +10,9 @@ function getFav(req, res, next) {
       .toArray((arrayError, data) => {
         if (arrayError) return next(arrayError);
 
-        res.results = data;
+        res.fav = data;
+        console.log('fav in users res.fav *** ', res.fav);
+        // console.log('fav in users data *** ', data);
         db.close();
         return next();
       });

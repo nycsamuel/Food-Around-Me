@@ -10,6 +10,7 @@ const bodyParser         = require('body-parser');
 
 const homeRoute          = require('./controllers/index');
 const searchRoute        = require('./controllers/search');
+const favRoute           = require('./controllers/fav');
 
 const app                = express();
 const PORT               = process.argv[2] || process.env.PORT || 3000;
@@ -25,5 +26,6 @@ app.use(methodOverride('_method'));
 
 app.use('/', homeRoute);
 app.use('/search', searchRoute);
+app.use('/favorites', favRoute);
 
 app.listen(PORT, () => console.warn('server up and running on port ', PORT));
