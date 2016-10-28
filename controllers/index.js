@@ -1,5 +1,5 @@
-const router  = require('express').Router();
-const users   = require('../models/users');
+fav router  = require('express').Router();
+const fav   = require('../models/fav');
 
 router.get('/', (req, res) => {
   // console.log(res.results.businesses);
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   });
 });
 
-// router.get('/', users.getFav, (req, res) => {
+// router.get('/', fav.getFav, (req, res) => {
 //   res.render('index', {
 //     results: res.results || [],
 //     fav: res.fav || [],

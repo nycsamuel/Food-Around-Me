@@ -1,19 +1,19 @@
 const router  = require('express').Router();
 // const yelp    = require('../services/yelp');
-const users   = require('../models/users');
+const fav   = require('../models/fav');
 
-router.get('/', users.getFav, (req, res) => {
+router.get('/', fav.getFav, (req, res) => {
   res.render('yelp/index', {
     results: res.results || [],
     fav: res.fav || [],
   });
 });
 
-router.post('/', users.saveFav, (req, res) => {
+router.post('/', fav.saveFav, (req, res) => {
   res.redirect('/favorites');
 });
 
-router.delete('/:id', users.deleteFav, (req, res) => {
+router.delete('/:id', fav.deleteFav, (req, res) => {
   res.redirect('/favorites');
 });
 
