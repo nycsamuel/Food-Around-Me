@@ -17,14 +17,15 @@ function search(req, res, next) {
   // values from form post method
   const userQuery = {
     term                    : req.body.term,
-    location                : req.body.location,
+    // cll                     : req.body.cll,
   };
   console.log('userQuery *** ', userQuery);
 
   const reqParams = {
     location                : 'New+York',
     limit                   : 5,
-    // ll                      : '40.7398476,-73.99020680000001',
+    sorting                 : 1, // this sorts by distance
+    // cll                      : '40.7398476,-73.99020680000001',
 
     oauth_consumer_key      : process.env.CONSUMER_KEY,
     oauth_token             : process.env.TOKEN,
