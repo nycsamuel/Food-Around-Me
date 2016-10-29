@@ -10,10 +10,13 @@ const logger             = require('morgan');
 const path               = require('path');
 const methodOverride     = require('method-override');
 const bodyParser         = require('body-parser');
+// const http               = require('http');
+// const ms                 = require('mediaserver');
 
 const homeRoute          = require('./controllers/index');
 const searchRoute        = require('./controllers/search');
 const favRoute           = require('./controllers/fav');
+const sendRoute          = require('./controllers/send');
 
 const app                = express();
 const PORT               = process.argv[2] || process.env.PORT || 3000;
@@ -44,5 +47,10 @@ app.use(cookieParser());
 app.use('/', homeRoute);
 app.use('/search', searchRoute);
 app.use('/favorites', favRoute);
+app.use('/send', sendRoute);
 
 app.listen(PORT, () => console.warn('server up and running on port ', PORT));
+
+// http.createServer((req, res) => {
+//   ms.pipe(req, res, 'pizza.wav');
+// }).listen(PORT, '127.0.0.1');

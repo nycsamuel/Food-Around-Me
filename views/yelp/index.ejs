@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="/css/homeStyle.css">
 </head>
 <body>
+  <form action="/send" method="POST">
+    <audio>
+      <source src="/assets/pizza.wav" name="speech">
+    </audio>
+    <input type="submit" value="Send Speech">
+  </form>
+
   <form action="/search" method="POST">
     <input type="text" name="term" placeholder="What are you in a mood for?">
     <input type="submit" value="Search">
