@@ -13,6 +13,7 @@ router.post('/', yelp.search, fav.getFav, (req, res) => {
   res.render('yelp/index', {
     results:   res.results.businesses || [],
     fav: res.fav || [],
+    GOOGLE_MAP_API_KEY: process.env.GOOGLE_MAP_API_KEY,
   });
 });
 

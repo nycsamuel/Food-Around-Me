@@ -14,9 +14,17 @@ const URL               = 'https://api.yelp.com/v2/search';
   * I used this tutorial to do oauth for yelp api
 */
 function search(req, res, next) {
+  // get geolocation from ajax call
+  const currentLat  = req.params.lat;
+  const currentLng  = req.params.lng;
+  const latlng = `${currentLat},${currentLng}`;
+
+
   // values from form post method
   const userQuery = {
     term                    : req.body.term,
+    location                : req.body.location,
+    cll                     : latlng,
     // cll                     : req.body.cll,
   };
   console.log('userQuery *** ', userQuery);
@@ -24,8 +32,8 @@ function search(req, res, next) {
   const reqParams = {
     location                : 'New+York',
     limit                   : 5,
-    sorting                 : 1, // this sorts by distance
-    // cll                      : '40.7398476,-73.99020680000001',
+    sorting                 : 1, // sorts by distance
+    cll                      : '40.7398476,-73.99020680000001',
 
     oauth_consumer_key      : process.env.CONSUMER_KEY,
     oauth_token             : process.env.TOKEN,
@@ -35,12 +43,14 @@ function search(req, res, next) {
     oauth_version           : '1.0',
   };
 
+  /* the order of parameters matter as the next param will overwrite if the key already exists */
   // const params = Object.assign(userQuery, reqParams);
-  const params = _.assign(userQuery, reqParams);
+  const params = _.assign(reqParams, userQuery);
 
   const CONSUMER_SECRET_KEY = process.env.CONSUMER_SECRET_KEY;
   const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
+  // create signature with oauth generate function
   const signature = oauthSignature.generate(
     'GET', // HTTP method
     URL,
@@ -59,6 +69,7 @@ function search(req, res, next) {
   const paramsURL = qs.stringify(params);
   console.log('paramsURL *** ', paramsURL);
 
+  // new url for yelp api call
   const API_URL = `${URL}?${paramsURL}`;
 
   fetch(API_URL)
