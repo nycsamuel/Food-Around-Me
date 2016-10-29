@@ -13,10 +13,10 @@ const bodyParser         = require('body-parser');
 // const http               = require('http');
 // const ms                 = require('mediaserver');
 
-const homeRoute          = require('./controllers/index');
-const searchRoute        = require('./controllers/search');
-const favRoute           = require('./controllers/fav');
-const sendRoute          = require('./controllers/send');
+const homeRoute          = require('./routes/index');
+const searchRoute        = require('./routes/search');
+const favRoute           = require('./routes/fav');
+const sendRoute          = require('./routes/send');
 
 const app                = express();
 const PORT               = process.argv[2] || process.env.PORT || 3000;
