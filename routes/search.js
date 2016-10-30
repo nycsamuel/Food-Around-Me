@@ -1,6 +1,7 @@
 const router  = require('express').Router();
 const yelp    = require('../services/yelp');
-const fav   = require('../models/fav');
+// const fav     = require('../models/fav');
+const gmap    = require('../services/maps');
 
 // router.get('/', fav.getFav, (req, res) => {
 //   res.render('index', {
@@ -9,10 +10,31 @@ const fav   = require('../models/fav');
 //   });
 // });
 
-router.post('/', yelp.search, fav.getFav, (req, res) => {
-  res.render('yelp/index', {
-    results:   res.results.businesses || [],
-    fav: res.fav || [],
+// router.post('/', yelp.search, fav.getFav, (req, res) => {
+//   res.render('yelp/index', {
+//     results:   res.yelpResults.businesses || [],
+//     fav: res.fav || [],
+//     GOOGLE_MAP_API_KEY: process.env.GOOGLE_MAP_API_KEY,
+//   });
+// });
+
+
+// router.post('/', yelp.search, gmap.setMarkers, (req, res) => {
+//   res.render('yelp/index', {
+//     results               : res.yelpResults.businesses || [],
+//     fav                   : res.fav || [],
+//     GOOGLE_MAP_API_KEY    : process.env.GOOGLE_MAP_API_KEY,
+//     markers               : res.latlng || [],
+//   });
+// });
+
+
+router.post('/', yelp.search, gmap.getLatLng, (req, res) => {
+  res.render('google/map', {
+    results               : res.yelpResults.businesses || [],
+    fav                   : res.fav || [],
+    GOOGLE_MAP_API_KEY    : process.env.GOOGLE_MAP_API_KEY,
+    latlngArray           : res.latlng || [],
   });
 });
 

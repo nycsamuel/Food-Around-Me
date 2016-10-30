@@ -6,19 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Home</title>
   <link rel="stylesheet" href="/css/homeStyle.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/homeScript.js"></script>
 </head>
 <body>
-  <form action="/send" method="POST">
-    <audio>
-      <source src="/assets/pizza.wav" name="speech">
-    </audio>
-    <input type="submit" value="Send Speech">
-  </form>
 
   <form action="/search" method="POST">
     <input type="text" name="term" placeholder="What are you in a mood for?">
+    <input type="text" name="location" placeholder="Location">
     <input type="submit" value="Search">
   </form>
+
+  <div id="map"></div>
 
   <div class="search-results">
     <% results.forEach(result => { %>

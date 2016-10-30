@@ -16,7 +16,8 @@ const bodyParser         = require('body-parser');
 const homeRoute          = require('./routes/index');
 const searchRoute        = require('./routes/search');
 const favRoute           = require('./routes/fav');
-const sendRoute          = require('./routes/send');
+const gmapRoute          = require('./routes/gmap');
+// const sendRoute          = require('./routes/send');
 
 const app                = express();
 const PORT               = process.argv[2] || process.env.PORT || 3000;
@@ -47,7 +48,8 @@ app.use(cookieParser());
 app.use('/', homeRoute);
 app.use('/search', searchRoute);
 app.use('/favorites', favRoute);
-app.use('/send', sendRoute);
+app.use('/map', gmapRoute);
+// app.use('/send', sendRoute);
 
 app.listen(PORT, () => console.warn('server up and running on port ', PORT));
 
