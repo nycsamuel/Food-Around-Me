@@ -46,7 +46,7 @@ function initMap() {
   // initialize map to default => GA
   map = new google.maps.Map(document.getElementById('map'), {
     center      : ga,
-    zoom        : 15,
+    zoom        : 12,
   });
   const infoWindow = new google.maps.InfoWindow({map: map});
   const infoWindow1 = new google.maps.InfoWindow({map: map});
@@ -60,34 +60,55 @@ function initMap() {
         lat     : position.coords.latitude,
         lng     : position.coords.longitude,
       };
+
+      // center on the user's position
       infoWindow.setPosition(pos);
       infoWindow.setContent('<h2>You are here</h2>');
       map.setCenter(pos);
-
       const currLocationMarker = new google.maps.Marker({
         position    : pos,
         map         : map,
       });
 
-      infoWindow1.setPosition(latlng_1_obj);
-      infoWindow1.setContent(content1);
+      // set marker for result
       const latlng_1_marker = new google.maps.Marker({
         position      : latlng_1_obj,
         map          : map,
       });
+      latlng_1_marker.addListener('click', () => {
+        map.setZoom(15);
+        map.setCenter(latlng_1_marker.getPosition());
+        infoWindow1.setPosition(latlng_1_obj);
+        infoWindow1.setContent(content1);
+      });
 
-      infoWindow2.setPosition(latlng_2_obj);
-      infoWindow2.setContent(content2);
+      // set marker for result
       const latlng_2_marker = new google.maps.Marker({
         position      : latlng_2_obj,
         map          : map,
       });
+      latlng_2_marker.addListener('click', () => {
+        map.setZoom(15);
+        map.setCenter(latlng_2_marker.getPosition());
+        infoWindow2.setPosition(latlng_2_obj);
+        infoWindow2.setContent(content2);
+      });
 
-      infoWindow3.setPosition(latlng_3_obj);
-      infoWindow3.setContent(content3);
+      // set marker for result
       const latlng_3_marker = new google.maps.Marker({
         position      : latlng_3_obj,
         map          : map,
+      });
+      latlng_3_marker.addListener('click', () => {
+        map.setZoom(15);
+        map.setCenter(latlng_3_marker.getPosition());
+        infoWindow3.setPosition(latlng_3_obj);
+        infoWindow3.setContent(content3);
+      });
+
+      // when map is clicked
+      google.maps.event.addDomListener(map, 'click', () => {
+        map.setZoom(12);
       });
     }, () => {
       console.log('geolocation failed...');
