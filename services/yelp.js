@@ -15,25 +15,25 @@ const URL               = 'https://api.yelp.com/v2/search';
 */
 function search(req, res, next) {
   // get geolocation from ajax call
-  const currentLat  = req.params.lat;
-  const currentLng  = req.params.lng;
-  const latlng = `${currentLat},${currentLng}`;
-
+  // const currentLat  = req.params.lat;
+  // const currentLng  = req.params.lng;
+  // const latlng = `${currentLat},${currentLng}`;
 
   // values from form post method
   const userQuery = {
     term                    : req.body.term,
     location                : req.body.location,
-    cll                     : latlng,
+    // cll                     : latlng,
     // cll                     : req.body.cll,
   };
   console.log('userQuery *** ', userQuery);
 
   const reqParams = {
     location                : 'New+York',
-    limit                   : 5,
+    limit                   : 3,
     sorting                 : 1, // sorts by distance
-    cll                      : '40.7398476,-73.99020680000001',
+    // cll                      : '40.7398476,-73.99020680000001',
+    // cll                     : latlng,
 
     oauth_consumer_key      : process.env.CONSUMER_KEY,
     oauth_token             : process.env.TOKEN,
@@ -71,11 +71,12 @@ function search(req, res, next) {
 
   // new url for yelp api call
   const API_URL = `${URL}?${paramsURL}`;
+  console.log('API_URL ***', API_URL);
 
   fetch(API_URL)
     .then(urlResult => urlResult.json())
     .then(jsonResult => {
-      res.results = jsonResult;
+      res.yelpResults = jsonResult;
       next();
     })
     .catch(err => {
