@@ -48,10 +48,14 @@ function initMap() {
     center      : ga,
     zoom        : 12,
   });
+
+  // info window of the results
   const infoWindow = new google.maps.InfoWindow({map: map});
   const infoWindow1 = new google.maps.InfoWindow({map: map});
   const infoWindow2 = new google.maps.InfoWindow({map: map});
   const infoWindow3 = new google.maps.InfoWindow({map: map});
+
+  // const image = 'https://cdn2.iconfinder.com/data/icons/places-4/100/food_place_marker_location_restaurant_eat_fork_knife-512.png';
 
   // if browser supports geolocation and user gives permission
   if (navigator.geolocation) {
@@ -62,18 +66,21 @@ function initMap() {
       };
 
       // center on the user's position
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('<h2>You are here</h2>');
+      // infoWindow.setPosition(pos);
+      // infoWindow.setContent('<h2>You are here</h2>');
       map.setCenter(pos);
       const currLocationMarker = new google.maps.Marker({
-        position    : pos,
-        map         : map,
+        position      : pos,
+        map           : map,
+        label         : 'You',
       });
 
       // set marker for result
       const latlng_1_marker = new google.maps.Marker({
         position      : latlng_1_obj,
-        map          : map,
+        map           : map,
+        label         : '1',
+        // icon          : image,
       });
       latlng_1_marker.addListener('click', () => {
         map.setZoom(15);
@@ -85,7 +92,8 @@ function initMap() {
       // set marker for result
       const latlng_2_marker = new google.maps.Marker({
         position      : latlng_2_obj,
-        map          : map,
+        map           : map,
+        label         : '2',
       });
       latlng_2_marker.addListener('click', () => {
         map.setZoom(15);
@@ -97,7 +105,8 @@ function initMap() {
       // set marker for result
       const latlng_3_marker = new google.maps.Marker({
         position      : latlng_3_obj,
-        map          : map,
+        map           : map,
+        label         : '3',
       });
       latlng_3_marker.addListener('click', () => {
         map.setZoom(15);
@@ -110,13 +119,36 @@ function initMap() {
       google.maps.event.addDomListener(map, 'click', () => {
         map.setZoom(12);
       });
+
+      // set polyline to yelp results
+      // const pathToResult1 = [pos, latlng_1_obj];
+      // const pathToResult2 = [pos, latlng_2_obj];
+      // const pathToResult3 = [pos, latlng_3_obj];
+      const flightPath = [
+        pos,
+        latlng_1_obj,
+        pos,
+        latlng_2_obj,
+        pos,
+        latlng_3_obj
+      ];
+
+      // draw polyline to the businesses
+      const pathDraw = new google.maps.Polyline({
+        path            : flightPath,
+        geodesic        : true,
+        strokeColor     : '#FF0000',
+        strokeOpacity   : 1.0,
+        strokeWeight    : 2,
+      });
+      pathDraw.setMap(map);
     }, () => {
       console.log('geolocation failed...');
     });
   } // if
 } // initMap
 
-//
+
 // $(document).ready(() => {
 //   console.log('after dom load');
 // });
