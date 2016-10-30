@@ -4,7 +4,7 @@ const n                 = require('nonce')();
 const _                 = require('lodash');
 const fetch             = require('node-fetch');
 const URL               = 'https://api.yelp.com/v2/search';
-// const request           = require('request');
+const request           = require('request');
 
 /**
   * This is from
@@ -14,6 +14,12 @@ const URL               = 'https://api.yelp.com/v2/search';
   * I used this tutorial to do oauth for yelp api
 */
 function search(req, res, next) {
+  // request('http://localhost:3000', (error, response, body) => {
+  //   if (!error && response.statusCode === 200) {
+  //     console.log('body *** ', body);
+  //   }
+  // });
+
   // values from form post method
   const userQuery = {
     term                    : req.body.term,
