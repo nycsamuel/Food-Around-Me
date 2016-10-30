@@ -19,11 +19,22 @@ const gmap    = require('../services/maps');
 // });
 
 
-router.post('/', yelp.search, gmap.setMarkers, (req, res) => {
-  res.render('yelp/index', {
-    results:   res.yelpResults.businesses || [],
-    fav: res.fav || [],
-    GOOGLE_MAP_API_KEY: process.env.GOOGLE_MAP_API_KEY,
+// router.post('/', yelp.search, gmap.setMarkers, (req, res) => {
+//   res.render('yelp/index', {
+//     results               : res.yelpResults.businesses || [],
+//     fav                   : res.fav || [],
+//     GOOGLE_MAP_API_KEY    : process.env.GOOGLE_MAP_API_KEY,
+//     markers               : res.latlng || [],
+//   });
+// });
+
+
+router.post('/', yelp.search, gmap.getLatLng, (req, res) => {
+  res.render('google/map', {
+    results               : res.yelpResults.businesses || [],
+    fav                   : res.fav || [],
+    GOOGLE_MAP_API_KEY    : process.env.GOOGLE_MAP_API_KEY,
+    latlngArray           : res.latlng || [],
   });
 });
 

@@ -17,8 +17,16 @@
 
   <div id="map"></div>
 
+  <input id="result-1" type="hidden" value="<%= latlngArray[0] %>">
+  <input id="result-2" type="hidden" value="<%= latlngArray[1] %>">
+  <input id="result-3" type="hidden" value="<%= latlngArray[2] %>">
 
-
+  <input id="result-1-name" type="hidden" value="<%= results[0].name %>">
+  <input id="result-1-addr" type="hidden" value="<%= results[0].location.address %>">
+  <input id="result-2-name" type="hidden" value="<%= results[1].name %>">
+  <input id="result-2-addr" type="hidden" value="<%= results[1].location.address %>">
+  <input id="result-3-name" type="hidden" value="<%= results[2].name %>">
+  <input id="result-3-addr" type="hidden" value="<%= results[2].location.address %>">
 
   <script type="text/javascript" src="/js/mapScript.js"></script>
   <script async defer

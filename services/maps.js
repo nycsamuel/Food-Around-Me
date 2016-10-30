@@ -1,6 +1,6 @@
 const fetch           = require('node-fetch');
 
-function setMarkers(req, res, next) {
+function getLatLng(req, res, next) {
   // console.log('yelp results *****', res.yelpResults.businesses);
 
   // array of results
@@ -15,10 +15,10 @@ function setMarkers(req, res, next) {
   });
 
   console.log('latlng ***', latlngArray);
-
+  res.latlng = latlngArray;
   next();
 }
 
 module.exports = {
-  setMarkers,
+  getLatLng,
 };
