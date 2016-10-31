@@ -1,5 +1,4 @@
-#Food around me
-### Sang Min (Samuel) Na
+#Food around me ### Sang Min (Samuel) Na
 
 
 ** Technologies Used **
