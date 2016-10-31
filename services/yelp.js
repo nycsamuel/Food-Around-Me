@@ -21,10 +21,21 @@ function search(req, res, next) {
   // });
 
   // values from form post method
-  const userQuery = {
-    term                    : req.body.term,
-    location                : req.body.location,
-  };
+
+  console.log('***HIT**');
+  console.log(req.body.speech);
+  let userQuery;
+  if(req.body.speech) {
+    userQuery = {
+      term                    : req.body.speech,
+      location                : req.body.location,
+    }
+  } else {
+    userQuery = {
+      term                    : req.body.term,
+      location                : req.body.location,
+    }
+  }
   console.log('userQuery *** ', userQuery);
 
   const reqParams = {
