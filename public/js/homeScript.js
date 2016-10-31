@@ -28,7 +28,7 @@ $(document).ready(() => {
     const hiddenForm  = $('#hiddenForm');
     const hiddenInput = $('<input>');
     hiddenInput.attr('type', 'hidden');
-    hiddenInput.attr('name', 'speak');
+    hiddenInput.attr('name', 'speech');
     hiddenInput.attr('value', words);
     hiddenForm.append(hiddenInput);
     hiddenForm.submit();
