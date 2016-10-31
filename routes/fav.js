@@ -5,7 +5,7 @@ const fav   = require('../models/fav');
 router.get('/', fav.getFav, (req, res) => {
   res.render('yelp/index', {
     results: res.results || [],
-    fav: res.fav || [],
+    fav: res.favorites || [],
   });
 });
 

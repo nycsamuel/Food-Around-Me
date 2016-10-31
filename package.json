@@ -2,7 +2,7 @@
   "name": "food-around-me",
   "version": "1.0.0",
   "description": "This uses yelp, google maps, foursqaure, geolocation APIs to create full stack web app",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

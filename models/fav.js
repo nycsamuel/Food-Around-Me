@@ -1,6 +1,5 @@
 const { ObjectID }      = require('mongodb');
 const { getDB }         = require('../lib/dbConnect.js');
-const dbConnection      = 'mongodb://localhost:27017/yelpUsers';
 
 function getFav(req, res, next) {
   // find all favorites for your userId
@@ -10,6 +9,7 @@ function getFav(req, res, next) {
       .toArray((toArrErr, data) => {
         if(toArrErr) return next(toArrErr);
         res.favorites = data;
+        console.log('favs *** ', res.favorites);
         db.close();
         next();
       });
