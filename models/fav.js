@@ -1,44 +1,42 @@
-const { MongoClient, ObjectID }      = require('mongodb');
-const dbConnection                   = 'mongodb://localhost:27017/yelpUsers';
+const { ObjectID }      = require('mongodb');
+const { getDB }         = require('../lib/dbConnect.js');
+const dbConnection      = 'mongodb://localhost:27017/yelpUsers';
 
 function getFav(req, res, next) {
-  MongoClient.connect(dbConnection, (err, db) => {
-    if (err) return next(err);
-
+  // find all favorites for your userId
+  getDB().then((db) => {
     db.collection('favorites')
-      .find({ userId: {$eq: req.session.userId} })
-      .toArray((arrayError, data) => {
-        if (arrayError) return next(arrayError);
-
-        res.fav = data;
-        // console.log('res.fav *** ', res.fav);
+      .find({ userId: { $eq: req.session.userId } })
+      .toArray((toArrErr, data) => {
+        if(toArrErr) return next(toArrErr);
+        res.favorites = data;
         db.close();
-        return next();
+        next();
       });
-
     return false;
   });
   return false;
 }
 
 function saveFav(req, res, next) {
+  // creating an empty object for the insertObj
   const insertObj = {};
-  for (let key in req.body) {
+
+  // copying all of req.body into insertObj
+  for(let key in req.body) {
     insertObj[key] = req.body[key];
   }
+
+  // Adding userId to insertObj
   insertObj.favorite.userId = req.session.userId;
 
-
-  MongoClient.connect(dbConnection, (err, db) => {
-    if (err) return next(err);
-
+  getDB().then((db) => {
     db.collection('favorites')
-      .insert(req.body.favorite, (insertErr, result) => {
+      .insert(insertObj.favorite, (insertErr, result) => {
         if (insertErr) return next(insertErr);
-
         res.saved = result;
         db.close();
-        return next();
+        next();
       });
     return false;
   });
@@ -46,16 +44,13 @@ function saveFav(req, res, next) {
 }
 
 function deleteFav(req, res, next) {
-  MongoClient.connect(dbConnection, (err, db) => {
-    if (err) return next(err);
-
+  getDB().then((db) => {
     db.collection('favorites')
-      .findAndRemove({ _id: ObjectID(req.params.id) }, (removeErr, doc) => {
-        if(removeErr) return next(removeErr);
-
-        res.removed = doc;
+      .findAndRemove({ _id: ObjectID(req.params.id) }, (removeErr, result) => {
+        if (removeErr) return next(removeErr);
+        res.removed = result;
         db.close();
-        return next();
+        next();
       });
     return false;
   });

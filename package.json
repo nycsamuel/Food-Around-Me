@@ -4,11 +4,15 @@
   "description": "This uses yelp, google maps, foursqaure, geolocation APIs to create full stack web app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git@git.generalassemb.ly:smna15/project-2.git"
+  },
+  "engines": {
+  "node": "6.6.0"
   },
   "author": "Samuel Na",
   "license": "ISC",
