@@ -15,8 +15,7 @@
     <input type="submit" value="Search">
   </form>
 
-  <div id="map"></div>
-
+  <!-- yelp results -->
   <input id="result-1" type="hidden" value="<%= latlngArray[0] %>">
   <input id="result-2" type="hidden" value="<%= latlngArray[1] %>">
   <input id="result-3" type="hidden" value="<%= latlngArray[2] %>">
@@ -27,6 +26,19 @@
   <input id="result-2-addr" type="hidden" value="<%= results[1].location.address %>">
   <input id="result-3-name" type="hidden" value="<%= results[2].name %>">
   <input id="result-3-addr" type="hidden" value="<%= results[2].location.address %>">
+
+
+
+  <div class="search-results">
+    <% results.forEach(element => { %>
+      <div>
+        <img src="" alt="businenss-img">
+      </div>
+    <% }) %>
+  </div>
+
+
+  <div id="map"></div>
 
   <script type="text/javascript" src="/js/mapScript.js"></script>
   <script async defer
