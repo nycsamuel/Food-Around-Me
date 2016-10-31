@@ -28,6 +28,13 @@ function search(req, res, next) {
   };
   console.log('userQuery *** ', userQuery);
 
+  // when there is no input in location input
+  const userQueryLocation = userQuery.location.trim();
+  if (userQueryLocation === '') {
+    console.log('this is when location is empty');
+    delete userQuery.location;
+  }
+
   const reqParams = {
     location                : 'New+York',
     limit                   : 3,
