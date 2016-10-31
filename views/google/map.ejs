@@ -15,8 +15,7 @@
     <input type="submit" value="Search">
   </form>
 
-  <div id="map"></div>
-
+  <!-- yelp results -->
   <input id="result-1" type="hidden" value="<%= latlngArray[0] %>">
   <input id="result-2" type="hidden" value="<%= latlngArray[1] %>">
   <input id="result-3" type="hidden" value="<%= latlngArray[2] %>">
@@ -27,6 +26,33 @@
   <input id="result-2-addr" type="hidden" value="<%= results[1].location.address %>">
   <input id="result-3-name" type="hidden" value="<%= results[2].name %>">
   <input id="result-3-addr" type="hidden" value="<%= results[2].location.address %>">
+
+
+  <div class="search-results">
+    <% results.forEach(element => { %>
+      <div class="business-info">
+        <img class="business-img" src="<%= element.image_url %>" alt="businenss-img">
+        <h3 clas="business-name"><%= element.name %></h3>
+        <img src="<%= element.rating_img_url %>" alt="review-img">
+        <p class="business-reviews"><%= element.review_count %></p>
+        <p class="business-addr"><%= element.location.display_address %></p>
+        <p class="business-phone"><%= element.phone %></p>
+
+        <form class="save" action="/favorites" method="POST">
+          <input type="hidden" name="favorite[image_url]" value="<%= element.image_url %>">
+          <input type="hidden" name="favorite[name]" value="<%= element.name %>">
+          <input type="hidden" name="favorite[rating_img_url]" value="<%= element.rating_img_url %>">
+          <input type="hidden" name="favorite[review_count]" value="<%= element.review_count %>">
+          <input type="hidden" name="favorite[display_addr]" value="<%= element.location.display_address %>">
+          <input type="hidden" name="favorite[phone]" value="<%= element.phone %>">
+          <input type="submit" value="Save">
+        </form>
+      </div>
+    <% }) %>
+  </div>
+
+
+  <div id="map"></div>
 
   <script type="text/javascript" src="/js/mapScript.js"></script>
   <script async defer

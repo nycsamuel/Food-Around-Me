@@ -1,3 +1,9 @@
+/**
+  * oauth-signature => generate oatuh signature
+  * querystring => turn query params and values to string format for url
+  * n => unique string for oauth
+  * lodash => used for object assign method which merges two or more objects in high-order --> same as Javascript's assign method
+*/
 const oauthSignature    = require('oauth-signature');
 const qs                = require('querystring');
 const n                 = require('nonce')();
@@ -14,25 +20,24 @@ const URL               = 'https://api.yelp.com/v2/search';
   * I used this tutorial to do oauth for yelp api
 */
 function search(req, res, next) {
-  // get geolocation from ajax call
-  // const currentLat  = req.params.lat;
-  // const currentLng  = req.params.lng;
-  // const latlng = `${currentLat},${currentLng}`;
-
   // values from form post method
-  const userQuery = {
-    term                    : req.body.term,
-    location                : req.body.location,
-    // cll                     : latlng,
-    // cll                     : req.body.cll,
-  };
-  console.log('userQuery *** ', userQuery);
+  let userQuery;
+  if (req.body.speech) {
+    userQuery = {
+      term                    : req.body.speech,
+      // location                : req.body.location,
+      // cll                     : latlng,
+      // cll                     : req.body.cll,
+    };
+  }
+  // console.log('userQuery *** ', userQuery);
 
   const reqParams = {
     location                : 'New+York',
-    limit                   : 3,
+    limit                   : 3, // returns only 3 results
     sorting                 : 1, // sorts by distance
-    // cll                      : '40.7398476,-73.99020680000001',
+    cll                     : '40.7398476,-73.99020680000001', // General Assembly
+    radius_filter           : 8000, // approx 5 miles
     // cll                     : latlng,
 
     oauth_consumer_key      : process.env.CONSUMER_KEY,
@@ -62,16 +67,14 @@ function search(req, res, next) {
 
   // add to params for api call
   params.oauth_signature = signature;
-  // console.log('params *****', params);
 
   // stringify an object into a query string, sorting the keys
   // i.e., turn objects into strings to be used as query strings
   const paramsURL = qs.stringify(params);
-  console.log('paramsURL *** ', paramsURL);
 
   // new url for yelp api call
   const API_URL = `${URL}?${paramsURL}`;
-  console.log('API_URL ***', API_URL);
+  // console.log('API_URL ***', API_URL);
 
   fetch(API_URL)
     .then(urlResult => urlResult.json())
@@ -85,7 +88,25 @@ function search(req, res, next) {
     });
 }
 
+function getLatLng(req, res, next) {
+  // array of results
+  const businesses = res.yelpResults.businesses;
+
+  // get latitude & longitude of each businesses
+  const latlngArray = [];
+  businesses.forEach(business => {
+    let lat     = business.location.coordinate.latitude;
+    let lng     = business.location.coordinate.longitude;
+    let latlng  = `${lat},${lng}`;
+    latlngArray.push(latlng);
+  });
+
+  // console.log('latlng ***', latlngArray);
+  res.latlng = latlngArray;
+  next();
+}
 
 module.exports = {
   search,
+  getLatLng,
 };

@@ -6,7 +6,7 @@ function getFav(req, res, next) {
     if (err) return next(err);
 
     db.collection('favorites')
-      .find({})
+      .find({ userId: {$eq: req.session.userId} })
       .toArray((arrayError, data) => {
         if (arrayError) return next(arrayError);
 

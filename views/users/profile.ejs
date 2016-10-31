@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Profile</title>
   <link rel="stylesheet" href="/css/profileStyle.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="/js/homeScript.js"></script>
 </head>
 <body>
 
@@ -13,6 +15,16 @@
   <form action="/auth?_method=DELETE" method="post">
     <input type="submit" value="Logout">
   </form>
+
+  <!-- <form action="/search" method="POST">
+    <input type="text" name="term" placeholder="What are you in a mood for?">
+    <input type="text" name="location" placeholder="Location">
+    <input type="submit" value="Search">
+  </form> -->
+
+
+  <button id="speak">What are you in a mood for?</button>
+  <form id="hiddenForm" action="/search" method="POST"></form>
 
 </body>
 </html>
