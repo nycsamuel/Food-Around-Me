@@ -88,6 +88,9 @@ function search(req, res, next) {
     });
 }
 
+/**
+  * Get the geolocation of 3 yelp results into array
+*/
 function getLatLng(req, res, next) {
   // array of results
   const businesses = res.yelpResults.businesses;

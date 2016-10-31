@@ -1,9 +1,10 @@
 /* google map api doesn't work when script is ran after DOM load */
 console.log('mapscript loaded!');
 
+// initialize map with General Assembly's geolocation as default
 let map;
 function initMap() {
-  // General Assembly
+  // General Assembly's geolocation
   const ga = {
     lat         : 40.7400615564274,
     lng         : -73.98996520048968,
@@ -50,12 +51,10 @@ function initMap() {
   });
 
   // info window of the results
-  const infoWindow = new google.maps.InfoWindow({map: map});
+  const infoWindow  = new google.maps.InfoWindow({map: map});
   const infoWindow1 = new google.maps.InfoWindow({map: map});
   const infoWindow2 = new google.maps.InfoWindow({map: map});
   const infoWindow3 = new google.maps.InfoWindow({map: map});
-
-  // const image = 'https://cdn2.iconfinder.com/data/icons/places-4/100/food_place_marker_location_restaurant_eat_fork_knife-512.png';
 
   // if browser supports geolocation and user gives permission
   if (navigator.geolocation) {
@@ -66,21 +65,19 @@ function initMap() {
       };
 
       // center on the user's position
-      // infoWindow.setPosition(pos);
-      // infoWindow.setContent('<h2>You are here</h2>');
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('<h2>You are here</h2>');
       map.setCenter(pos);
       const currLocationMarker = new google.maps.Marker({
         position      : pos,
         map           : map,
-        // label         : 'You',
       });
 
-      // set marker for result
+      // set a marker for each businesses and have click listener to each markers
       const latlng_1_marker = new google.maps.Marker({
         position      : latlng_1_obj,
         map           : map,
         label         : '1',
-        // icon          : image,
       });
       latlng_1_marker.addListener('click', () => {
         map.setZoom(15);
@@ -88,8 +85,6 @@ function initMap() {
         infoWindow1.setPosition(latlng_1_obj);
         infoWindow1.setContent(content1);
       });
-
-      // set marker for result
       const latlng_2_marker = new google.maps.Marker({
         position      : latlng_2_obj,
         map           : map,
@@ -101,8 +96,6 @@ function initMap() {
         infoWindow2.setPosition(latlng_2_obj);
         infoWindow2.setContent(content2);
       });
-
-      // set marker for result
       const latlng_3_marker = new google.maps.Marker({
         position      : latlng_3_obj,
         map           : map,
@@ -115,15 +108,12 @@ function initMap() {
         infoWindow3.setContent(content3);
       });
 
-      // when map is clicked
+      // when map is clicked, zoom out
       google.maps.event.addDomListener(map, 'click', () => {
         map.setZoom(12);
       });
 
-      // set polyline to yelp results
-      // const pathToResult1 = [pos, latlng_1_obj];
-      // const pathToResult2 = [pos, latlng_2_obj];
-      // const pathToResult3 = [pos, latlng_3_obj];
+      // set polyline to yelp  => draw red line from current position to each businesses
       const flightPath = [
         pos,
         latlng_1_obj,
@@ -147,8 +137,3 @@ function initMap() {
     });
   } // if
 } // initMap
-
-
-// $(document).ready(() => {
-//   console.log('after dom load');
-// });

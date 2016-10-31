@@ -2,7 +2,7 @@
 $(document).ready(() => {
   console.log('script loaded!');
 
-  // check if browser supports geolocation
+  // check if browser supports geolocation and get current geolocation
   if ('getlocation' in navigator) {
     navigator.geolocation.getCurrentPosition(pos => {
       const currentLat = pos.coords.latitude;
@@ -12,14 +12,17 @@ $(document).ready(() => {
     console.log('geolocation not available');
   }
 
+  // create new html5 webkitSpeechRecognition obj
   const speechRecognition = new webkitSpeechRecognition();
 
+  // btn starts the speechRecognition
   const talkBtn = $('#speak');
-
   talkBtn.on('click', () => {
     speechRecognition.start();
   });
 
+  // after speechRecognition, it gets the transcribed speech and
+  // uses hidden form to send the transcribed text to '/search'
   speechRecognition.onresult = event => {
     console.log(event.results[0][0].transcript);
     let words = event.results[0][0].transcript;
@@ -34,18 +37,3 @@ $(document).ready(() => {
     hiddenForm.submit();
   };
 });
-
-
-/*
-$.ajax({
-  type    : 'POST',
-  data    : { speech: words },
-  url     : '/search',
-  success : () => console.log('success'),
-})
-.done(() => {
-  // $('#hiddenForm').submit();
-});
-
-$('#hiddenForm').submit();
-*/

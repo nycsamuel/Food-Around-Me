@@ -10,8 +10,6 @@ const logger             = require('morgan');
 const path               = require('path');
 const methodOverride     = require('method-override');
 const bodyParser         = require('body-parser');
-// const http               = require('http');
-// const ms                 = require('mediaserver');
 
 const homeRoute          = require('./routes/index');
 const searchRoute        = require('./routes/search');
@@ -19,7 +17,6 @@ const favRoute           = require('./routes/fav');
 const gmapRoute          = require('./routes/gmap');
 const authRoute          = require('./routes/auth');
 const userRoute          = require('./routes/user');
-// const sendRoute          = require('./routes/send');
 
 const app                = express();
 const PORT               = process.argv[2] || process.env.PORT || 3000;
@@ -56,7 +53,3 @@ app.use('/users', userRoute);
 // app.use('/send', sendRoute);
 
 app.listen(PORT, () => console.warn('server up and running on port ', PORT));
-
-// http.createServer((req, res) => {
-//   ms.pipe(req, res, 'pizza.wav');
-// }).listen(PORT, '127.0.0.1');

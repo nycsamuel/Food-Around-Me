@@ -18,4 +18,3 @@ router.delete('/:id', fav.deleteFav, (req, res) => {
 });
 
 module.exports = router;
-1

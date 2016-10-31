@@ -1,3 +1,8 @@
+/**
+  * This code is from General Assembly
+  * https://git.generalassemb.ly/wdi-nyc-60/user_auth_itunes
+*/
+
 const { ObjectID }      = require('mongodb');
 const { getDB }         = require('../lib/dbConnect.js');
 

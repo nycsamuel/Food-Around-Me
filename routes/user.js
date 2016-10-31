@@ -1,3 +1,9 @@
+/**
+  * This code is from General Assembly
+  * https://git.generalassemb.ly/wdi-nyc-60/user_auth_itunes
+*/
+
+
 /* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
 
 const express             = require('express');
