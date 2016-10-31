@@ -1,6 +1,7 @@
 // DOM loaded
 $(document).ready(() => {
   console.log('script loaded!');
+
   // check if browser supports geolocation
   if ('getlocation' in navigator) {
     navigator.geolocation.getCurrentPosition(pos => {
@@ -24,11 +25,27 @@ $(document).ready(() => {
     let words = event.results[0][0].transcript;
 
     // send words to the server
-    $.ajax({
-      type    : 'POST',
-      data    : { speech: words },
-      url     : '/search',
-      success : () => console.log('success'),
-    });
+    const hiddenForm  = $('#hiddenForm');
+    const hiddenInput = $('<input>');
+    hiddenInput.attr('type', 'hidden');
+    hiddenInput.attr('name', 'speak');
+    hiddenInput.attr('value', words);
+    hiddenForm.append(hiddenInput);
+    hiddenForm.submit();
   };
 });
+
+
+/*
+$.ajax({
+  type    : 'POST',
+  data    : { speech: words },
+  url     : '/search',
+  success : () => console.log('success'),
+})
+.done(() => {
+  // $('#hiddenForm').submit();
+});
+
+$('#hiddenForm').submit();
+*/

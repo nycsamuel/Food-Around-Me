@@ -1,7 +1,7 @@
 const router  = require('express').Router();
 const yelp    = require('../services/yelp');
 // const fav     = require('../models/fav');
-const gmap    = require('../services/maps');
+// const gmap    = require('../services/maps');
 
 // router.get('/', fav.getFav, (req, res) => {
 //   res.render('index', {
@@ -29,7 +29,7 @@ const gmap    = require('../services/maps');
 // });
 
 
-router.post('/', yelp.search, gmap.getLatLng, (req, res) => {
+router.post('/', yelp.search, yelp.getLatLng, (req, res) => {
   res.render('google/map', {
     results               : res.yelpResults.businesses || [],
     fav                   : res.fav || [],

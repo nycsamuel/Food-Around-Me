@@ -20,17 +20,11 @@ function search(req, res, next) {
   // const latlng = `${currentLat},${currentLng}`;
 
   // values from form post method
+  console.log('speech *** ', req.body.speech);
   let userQuery;
   if (req.body.speech) {
     userQuery = {
       term                    : req.body.speech,
-      // location                : req.body.location,
-      // cll                     : latlng,
-      // cll                     : req.body.cll,
-    };
-  } else {
-    userQuery = {
-      term                    : req.body.term,
       // location                : req.body.location,
       // cll                     : latlng,
       // cll                     : req.body.cll,
@@ -102,7 +96,26 @@ function search(req, res, next) {
     });
 }
 
+function getLatLng(req, res, next) {
+  // console.log('yelp results *****', res.yelpResults.businesses);
+
+  // array of results
+  const businesses = res.yelpResults.businesses;
+  // get latitude & longitude of each businesses
+  const latlngArray = [];
+  businesses.forEach(business => {
+    let lat     = business.location.coordinate.latitude;
+    let lng     = business.location.coordinate.longitude;
+    let latlng  = `${lat},${lng}`;
+    latlngArray.push(latlng);
+  });
+
+  console.log('latlng ***', latlngArray);
+  res.latlng = latlngArray;
+  next();
+}
 
 module.exports = {
   search,
+  getLatLng,
 };
