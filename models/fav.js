@@ -49,6 +49,7 @@ function saveFav(req, res, next) {
 }
 
 function deleteFav(req, res, next) {
+  console.log('********** delete');
   getDB().then((db) => {
     db.collection('favorites')
       .findAndRemove({ _id: ObjectID(req.params.id) }, (removeErr, result) => {
