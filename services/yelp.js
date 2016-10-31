@@ -20,20 +20,30 @@ function search(req, res, next) {
   // const latlng = `${currentLat},${currentLng}`;
 
   // values from form post method
-  const userQuery = {
-    term                    : req.body.term,
-    location                : req.body.location,
-    // cll                     : latlng,
-    // cll                     : req.body.cll,
-  };
+  let userQuery;
+  if (req.body.speech) {
+    userQuery = {
+      term                    : req.body.speech,
+      // location                : req.body.location,
+      // cll                     : latlng,
+      // cll                     : req.body.cll,
+    };
+  } else {
+    userQuery = {
+      term                    : req.body.term,
+      // location                : req.body.location,
+      // cll                     : latlng,
+      // cll                     : req.body.cll,
+    };
+  }
   console.log('userQuery *** ', userQuery);
 
   // when there is no input in location input
-  const userQueryLocation = userQuery.location.trim();
-  if (userQueryLocation === '') {
-    console.log('this is when location is empty');
-    delete userQuery.location;
-  }
+  // const userQueryLocation = userQuery.location.trim();
+  // if (userQueryLocation === '') {
+  //   console.log('this is when location is empty');
+  //   delete userQuery.location;
+  // }
 
   const reqParams = {
     location                : 'New+York',
