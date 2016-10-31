@@ -72,7 +72,7 @@ function initMap() {
       const currLocationMarker = new google.maps.Marker({
         position      : pos,
         map           : map,
-        label         : 'You',
+        // label         : 'You',
       });
 
       // set marker for result

@@ -17,6 +17,8 @@ const homeRoute          = require('./routes/index');
 const searchRoute        = require('./routes/search');
 const favRoute           = require('./routes/fav');
 const gmapRoute          = require('./routes/gmap');
+const authRoute          = require('./routes/auth');
+const userRoute          = require('./routes/user');
 // const sendRoute          = require('./routes/send');
 
 const app                = express();
@@ -49,6 +51,8 @@ app.use('/', homeRoute);
 app.use('/search', searchRoute);
 app.use('/favorites', favRoute);
 app.use('/map', gmapRoute);
+app.use('/auth', authRoute);
+app.use('/users', userRoute);
 // app.use('/send', sendRoute);
 
 app.listen(PORT, () => console.warn('server up and running on port ', PORT));
