@@ -4,16 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Map</title>
+  <title>Results</title>
   <link rel="stylesheet" href="/css/mapStyle.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
-  <form action="/search" method="POST">
-    <input type="text" name="term" placeholder="What are you in a mood for?">
-    <input type="text" name="location" placeholder="Location">
-    <input type="submit" value="Search">
-  </form>
+
+  <header>
+    <div class="mic-wrapper" id="speak">
+      <img src="https://lh4.ggpht.com/3YabEP2rKnKm7RpyGeU0ERPdzh4Ww9ZZ13Eu9_1TnH_b3gn_XK42GcWKkCfIq3GJo44=w300" alt="mic">
+    </div>
+
+    <div class="msg">
+      <h1>Hi <%= user.username %>, what would you like to eat today?</h1>
+    </div>
+
+    <div class="logout">
+      <form class="logout-form" action="/auth?_method=DELETE" method="post">
+        <input type="submit" value="Logout" src="http://plainicon.com/dboard/userprod/2805_fce53/prod_thumb/plainicon.com-48720-512px-382.png">
+      </form>
+    </div>
+  </header>
+
+
+
+  <div class="search-results">
+    <% results.forEach(element => { %>
+      <div class="business-info">
+        <form class="save" action="/users/profile" method="POST">
+          <input type="hidden" name="favorite[image_url]" value="<%= element.image_url %>">
+          <input type="hidden" name="favorite[name]" value="<%= element.name %>">
+          <input type="hidden" name="favorite[rating_img_url]" value="<%= element.rating_img_url %>">
+          <input type="hidden" name="favorite[review_count]" value="<%= element.review_count %>">
+          <input type="hidden" name="favorite[display_addr]" value="<%= element.location.display_address %>">
+          <input type="hidden" name="favorite[phone]" value="<%= element.phone %>">
+          <input type="submit" value="Save">
+        </form>
+
+        <div class="name">
+          <img class="business-img" src="<%= element.image_url %>" alt="businenss-img">
+          <h3 clas="business-name"><%= element.name %></h3>
+          <img src="<%= element.rating_img_url %>" alt="review-img">
+        </div>
+
+        <div class="info">
+          <p class="business-reviews">Reviews:<%= element.review_count %></p>
+          <p class="business-addr"><%= element.location.display_address %></p>
+          <p class="business-phone">Phone: <%= element.phone %></p>
+        </div>
+
+      </div>
+      <% }) %>
+  </div>
+
+  <div id="map"></div>
+
 
   <!-- yelp results -->
   <input id="result-1" type="hidden" value="<%= latlngArray[0] %>">
@@ -27,32 +72,8 @@
   <input id="result-3-name" type="hidden" value="<%= results[2].name %>">
   <input id="result-3-addr" type="hidden" value="<%= results[2].location.address %>">
 
+  <form id="hiddenForm" action="/search" method="POST"></form>
 
-  <div class="search-results">
-    <% results.forEach(element => { %>
-      <div class="business-info">
-        <img class="business-img" src="<%= element.image_url %>" alt="businenss-img">
-        <h3 clas="business-name"><%= element.name %></h3>
-        <img src="<%= element.rating_img_url %>" alt="review-img">
-        <p class="business-reviews"><%= element.review_count %></p>
-        <p class="business-addr"><%= element.location.display_address %></p>
-        <p class="business-phone"><%= element.phone %></p>
-
-        <form class="save" action="/favorites" method="POST">
-          <input type="hidden" name="favorite[image_url]" value="<%= element.image_url %>">
-          <input type="hidden" name="favorite[name]" value="<%= element.name %>">
-          <input type="hidden" name="favorite[rating_img_url]" value="<%= element.rating_img_url %>">
-          <input type="hidden" name="favorite[review_count]" value="<%= element.review_count %>">
-          <input type="hidden" name="favorite[display_addr]" value="<%= element.location.display_address %>">
-          <input type="hidden" name="favorite[phone]" value="<%= element.phone %>">
-          <input type="submit" value="Save">
-        </form>
-      </div>
-    <% }) %>
-  </div>
-
-
-  <div id="map"></div>
 
   <script type="text/javascript" src="/js/mapScript.js"></script>
   <script async defer
