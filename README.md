@@ -31,6 +31,12 @@ node server.js
 ```
 This will run the web application on localhost. Use the latest Chrome browsers.
 
+### User Stories
+* As an user, I want to search for foods using voice and/or typing
+* As an user, I want to save favorite stores and see where I went
+* As an user, I want to use search for foods without constraints
+* As an user, I want to see how far is the store
+
 ** Approach **
 - The main principle of this web application is to search for food around me returning the Yelp results that are closest to the current position.
 - The core functionality is searching with Yelp API and returning the results to the user. I started with Yelp first and made sure that the queries are working.
