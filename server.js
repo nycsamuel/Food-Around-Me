@@ -44,6 +44,7 @@ app.use(cookieParser());
 
 app.use('/', homeRoute);
 app.use('/search', searchRoute);
+app.use('/auth', authRoute);
 app.use('/users', userRoute);
 
 app.listen(PORT, () => console.warn('server up and running on port ', PORT));
