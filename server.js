@@ -13,7 +13,6 @@ const bodyParser         = require('body-parser');
 
 const homeRoute          = require('./routes/index');
 const searchRoute        = require('./routes/search');
-const favRoute           = require('./routes/fav');
 const authRoute          = require('./routes/auth');
 const userRoute          = require('./routes/user');
 
@@ -45,9 +44,6 @@ app.use(cookieParser());
 
 app.use('/', homeRoute);
 app.use('/search', searchRoute);
-app.use('/favorites', favRoute);
-app.use('/auth', authRoute);
 app.use('/users', userRoute);
-// app.use('/send', sendRoute);
 
 app.listen(PORT, () => console.warn('server up and running on port ', PORT));
