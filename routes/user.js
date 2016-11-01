@@ -9,6 +9,7 @@
 const express             = require('express');
 const { createUser }      = require('../models/user.js');
 const { authenticate }    = require('../lib/auth');
+const fav                 = require('../models/fav');
 
 const usersRouter  = express.Router();
 
@@ -25,8 +26,25 @@ usersRouter.post('/', createUser, (req, res) => {
  * It redirects to /login when attempted to be reached by a non logged in user
  * It is "protected" by the authenticate middleware from the auth library
  */
-usersRouter.get('/profile', authenticate, (req, res) => {
-  res.render('users/profile', { user: res.user });
+// usersRouter.get('/profile', authenticate, (req, res) => {
+//   res.render('users/profile', { user: res.user });
+// });
+
+
+usersRouter.get('/profile', authenticate, fav.getFav, (req, res) => {
+  res.render('users/profile', {
+    results   : res.results || [],
+    fav       : res.favorites || [],
+    user      : res.user,
+  });
+});
+
+usersRouter.post('/profile', fav.saveFav, (req, res) => {
+  res.redirect('/users/profile');
+});
+
+usersRouter.delete('/profile/:id', fav.deleteFav, (req, res) => {
+  res.redirect('/users/profile');
 });
 
 module.exports = usersRouter;
