@@ -6,6 +6,10 @@ $(document).ready(() => {
   const createAcct = $('#createAcct');
   const goBack = $('#goBack');
 
+  $('.closeModal').on('click', () => {
+    $('.tutorialModal').toggleClass('finished');
+  });
+
   // hide signup
   signup.hide();
 
