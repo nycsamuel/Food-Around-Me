@@ -104,6 +104,7 @@ input[type=submit]:hover {
 .tutorialModal {
   display: block;
   position: absolute;
+  overflow-y: scroll;
   width: 50%;
   height: 50%;
   margin: auto;
